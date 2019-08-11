@@ -1,8 +1,16 @@
+import gym
+import random
 import numpy as np
-from AgentMemory import *
+import time
 
-a = []
+env = gym.make('PongDeterministic-v4')
+actionSpace = env.action_space.n
 
 while True:
-    a.append(np.zeros((100,100)))
-    if len(a) >= 10000: a = []
+    env.reset()
+    done = False
+    while not done:
+        a,b,done,c = env.step(np.random.randint(0,actionSpace))
+        print(env.ale.lives())
+        env.render()
+        #time.sleep(0.05)

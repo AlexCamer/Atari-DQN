@@ -7,7 +7,7 @@ import gc
 import cv2
 import time
 import matplotlib.pyplot as plt
-from StateProcessor import *
+from FrameProcessor import *
 
 env = gym.make('BreakoutDeterministic-v4')
 location = 'models/recent.h5'
@@ -37,18 +37,18 @@ def preProcess(frame):
 def getQs(state):
         return model.predict(state/255)
 
-stateProcessor = StateProcessor()
+frameProcessor = FrameProcessor()
 
 while True:
     done = False
-    stateProcessor.update(preProcess(env.reset()))
+    frameProcessor.update(preProcess(env.reset()))
     epReward = 0
 
     while not done:
-        if np.random.random() > 0.02: action = np.argmax(getQs(stateProcessor.newState.reshape((1,84,84,1))))
+        if np.random.random() > 0.02: action = np.argmax(getQs(frameProcessor.newState.reshape((1,84,84,1))))
         else: action = np.random.randint(0,actionSpace)
         newFrame, reward, done = step(action)
-        stateProcessor.update(newFrame)
+        frameProcessor.update(newFrame)
         env.render()
         epReward += reward
         time.sleep(0.03)

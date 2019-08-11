@@ -21,7 +21,6 @@ class PriorityMemoryChunk:
     self.content = content
     self.countdown = countdown
 
-'''
 class RandomReplaceMemory:
   def __init__(self, maxlen):
     self.list = []
@@ -31,4 +30,3 @@ class RandomReplaceMemory:
     else: self.list.append(element)
   def randomSample(self, size):
     return random.sample(self.list, size)    
-'''
